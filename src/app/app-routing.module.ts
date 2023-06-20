@@ -5,6 +5,9 @@ import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 const routes: Routes = [
   {
     path: 'chat', component: ChatPageComponent
+  },
+  {
+    path: '', redirectTo: 'chat', pathMatch: 'full'
   }
 ];
 
