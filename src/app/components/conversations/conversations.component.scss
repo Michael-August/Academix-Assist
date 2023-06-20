@@ -1,0 +1,55 @@
+.convo-side {
+    .new-chat {
+        button {
+            cursor: pointer;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: 1px #757675 solid;
+            border-radius: 8px;
+            padding: 10px 20px;
+            margin-bottom: 40px;
+
+            img {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .conversations {
+
+        .conversation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: 0.5px #f8c1ad solid;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease-in;
+
+            img {
+                width: 10%;
+            }
+
+            .message {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 22px;
+            }
+
+            &:hover {
+                background: #EB5B28;
+                color: white;
+            }
+        }
+    }
+}
+
+.active {
+    background: #EB5B28;
+    color: white;
+}

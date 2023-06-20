@@ -1,0 +1,90 @@
+<div class="nav-bar">
+    <div class="logo">
+        <span class="main-logo">Academix</span>
+        <span class="sub-logo">Assist</span>
+    </div>
+
+    <div class="links">
+        <ul class="authenticated link-items">
+            <li class="link-item" style="margin-right: 30px;">
+                Go premium
+            </li>
+            <li class="link-item">
+                <img src="assets/images/noimg_avatar.png" alt="">
+                <span class="loggedin-user">Michael August</span>
+            </li>
+        </ul>
+
+        <!-- <ul class="unauthenticated link-items">
+            <li class="link-item sign-up" (click)="openForm('signup')">
+                Sign up
+            </li>
+            <li class="link-item" (click)="openForm('login')">
+                Log in
+            </li>
+        </ul> -->
+    </div>
+</div>
+
+<app-modal *ngIf="openAuthModal">
+    <div class="login" *ngIf="openLogInModal">
+        <div class="header">
+            <img src="assets/icons/close2.png" class="close" (click)="closeModalAction()" alt="">
+    
+            <h2>Log In</h2>
+            <p>Get all academics information with ease</p>
+        </div>
+    
+        <form [formGroup]="loginForm" class="modal-form" (ngSubmit)="login()">
+            <div class="form-controls">
+                <label for="">Email</label>
+                <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+            </div>
+    
+            <div class="form-controls">
+                <label for="">Password</label>
+                <input formControlName="password" type="password" placeholder="*************">
+            </div>
+    
+            <button *ngIf="!isLoading" type="submit" class="btn">Log In</button>
+            <app-dotted-loader *ngIf="isLoading"></app-dotted-loader>
+        </form>
+    
+        <div class="others">
+            <p>Don’t have an account? <span (click)="openForm('signup')">Sign Up</span></p>
+        </div>
+    </div>
+
+    <div class="signup" *ngIf="openSignUpModal">
+        <div class="header">
+            <img src="assets/icons/close2.png" class="close" (click)="closeModalAction()" alt="">
+    
+            <h2>Sign Up</h2>
+            <p>Join Academix Assist to get all academics information with ease</p>
+        </div>
+    
+        <form [formGroup]="signinForm" (ngSubmit)="signup()" class="modal-form">
+            <div class="form-controls">
+                <label for="">Email</label>
+                <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+            </div>
+
+            <div class="form-controls">
+                <label for="">Pnoe Number (WhatsApp)</label>
+                <input formControlName="phone" type="tel" placeholder="08065432135">
+            </div>
+    
+            <div class="form-controls">
+                <label for="">Password</label>
+                <input formControlName="password" type="password" placeholder="*************">
+            </div>
+    
+            <button *ngIf="!isLoading" (click)="signup()" type="submit" class="btn">Sign Up</button>
+            <app-dotted-loader *ngIf="isLoading"></app-dotted-loader>
+        </form>
+    
+        <div class="others">
+            <p>Already have an account? <span (click)="openForm('login')">Log In</span></p>
+        </div>
+    </div>
+</app-modal>

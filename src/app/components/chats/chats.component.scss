@@ -1,0 +1,21 @@
+.chats {
+    padding: 0 32px;
+
+    .message {
+        display: flex;
+        align-items: flex-start;
+        margin: 0 -32px;
+        padding: 20px 32px;
+        // margin-bottom: 30px;
+
+        img {
+            width: 5%;
+            margin-right: 30px;
+        }
+    }
+
+    .response {
+        background-color: #fcf2ef;
+        color: black;
+    }
+}
