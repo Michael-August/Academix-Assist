@@ -1,0 +1,63 @@
+<div class="container">
+    <div (click)="goBack()" class="back">
+        <img src="assets/icons/arrow_back.png" alt="">
+        <span>Go back</span>
+    </div>
+
+    <div class="sub-detail">
+        <div class="detail">
+            <p class="intro">Academix Assist</p>
+            <div class="header">
+                <h1>Subscribe to Academix Assist</h1>
+                <p>Get all academics information with ease</p>
+            </div>
+
+            <div class="content">
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Your initial questions or requests will be loaded on login, you don't hve to ask them again.</span>
+                </div>
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Seamlessly Integrate with your WhatsApp application.</span>
+                </div>
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Ut magna justo quis neque. Senectus lorem maecenas eleifend ullamcorper sed enim lectus. Lectus
+                        senectus.</span>
+                </div>
+            </div>
+        </div>
+        <div class="pricing">
+            <div class="options tabs">
+                <span (click)="switchDurationOption('monthly')"
+                    [ngClass]="{active: paymentDurationOption.durationOption == 'monthly' && paymentDurationOption.status == 'active' }">Monthly</span>
+                <span (click)="switchDurationOption('annual')"
+                    [ngClass]="{active: paymentDurationOption.durationOption == 'annual' && paymentDurationOption.status == 'active' }">Yearly</span>
+            </div>
+
+            <hr style="margin: 10px -39px 45px -39px; border: 0.5px solid #D6D6D6;" />
+        
+            <div class="option-content pricing-body" *ngIf="paymentDurationOption.durationOption == 'monthly'">
+                <span class="price">{{paymentDurationOption.price}}</span>
+                <span class="description">Per month, paid anually</span>
+                <span (click)="switchDurationOption('annual')" class="last">Switch to yearly payment</span>
+        
+                <div class="footer">
+                    <button class="btn" *ngIf="isLoading == false" (click)="goToSub()">Proceed to payment</button>
+                    <app-dotted-loader *ngIf="isLoading == true"></app-dotted-loader>
+                </div>
+            </div>
+        
+            <div class="option-content pricing-body" *ngIf="paymentDurationOption.durationOption == 'annual'">
+                <span class="price">{{paymentDurationOption.price}}</span>
+                <span class="description annual-desc">Paid anually</span>
+        
+                <div class="footer">
+                    <button class="btn" *ngIf="isLoading == false" (click)="goToSub()">Proceed to payment</button>
+                    <app-dotted-loader *ngIf="isLoading == true"></app-dotted-loader>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

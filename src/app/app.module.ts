@@ -11,6 +11,7 @@ import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { DottedLoaderComponent } from './shared/components/dotted-loader/dotted-loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PremiumAdPageComponent } from './pages/premium-ad-page/premium-ad-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LandingPageComponent,
     ChatPageComponent,
     ModalComponent,
-    DottedLoaderComponent
+    DottedLoaderComponent,
+    PremiumAdPageComponent
   ],
   imports: [
     BrowserModule,
