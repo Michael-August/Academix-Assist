@@ -10,6 +10,7 @@
         display: flex;
         flex-direction: column;
         margin: 0 32px;
+        cursor: pointer;
 
         .main-logo {
             font-size: 18px;
@@ -51,6 +52,7 @@
             .sign-up {
                 font-weight: 500;
                 margin-right: 30px;
+                margin-left: 30px;
                 background-color: #EB5B28;
                 color: white;
                 padding: 10px 20px;

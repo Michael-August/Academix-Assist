@@ -1,1 +1,243 @@
-<p>landing-page works!</p>
+<div class="container">
+    <div class="banner">
+        <div class="banner-heading">
+            <span class="title">Get all academic information with ease</span>
+            <span class="desc">Join Academix Assist for reliable info and save your time.</span>
+            <div class="btns">
+                <button class="btn filled" routerLink="/threats-map" (click)="openForm('signup')">Get started</button>
+                <button class="btn outlined" routerLink="/threats-map/report-threat" (click)="openForm('login')">Log in</button>
+            </div>
+        </div>
+        <div class="display-img">
+            <img src="assets/images/mockup.jpeg" alt="">
+        </div>
+    </div>
+
+    <div class="accessibilty">
+        <span class="accessibility-title">Amazing Features and Easily Accessible</span>
+        <div class="accessibilty-content">
+            <div class="right">
+                <div class="bullet">
+                    <img src="assets/images/special_bullet.png" alt="">
+                </div>
+                <div class="writeups">
+                    <div class="writeup">
+                        <span class="writeup-title">Safe and Trusted</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a research environment.</span>
+                    </div>
+                    <div class="writeup">
+                        <span class="writeup-title">Fast and Prompt</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a research
+                            environment.</span>
+                    </div>
+                    <div class="writeup">
+                        <span class="writeup-title">Credible and resourceful</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a research
+                            environment.</span>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <div class="center-img">
+                <img src="assets/images/happy.jpeg" alt="">
+            </div> -->
+            <div class="left">
+                <div class="bullet">
+                    <img src="assets/images/special_bullet.png" alt="">
+                </div>
+                <div class="writeups">
+                    <div class="writeup left">
+                        <span class="writeup-title">Safe and Trusted</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a
+                            research environment.</span>
+                    </div>
+                    <div class="writeup left">
+                        <span class="writeup-title">Fast and Prompt</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a
+                            research
+                            environment.</span>
+                    </div>
+                    <div class="writeup left">
+                        <span class="writeup-title">Credible and resourceful</span>
+                        <span class="writeup-value">Design programs that encourage research activities and academic
+                            integrity in a
+                            research
+                            environment.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="accessibilty-footer">
+            <img src="assets/images/apple_btn.png" alt="">
+            <img src="assets/images/google_btn.png" alt="">
+        </div>
+    </div>
+
+    <div class="sub-detail">
+        <div class="detail">
+            <p class="intro">Unlock all features</p>
+            <div class="header">
+                <h1>Subscribe to Academix Assist</h1>
+                <p>Get all academics information with ease</p>
+            </div>
+    
+            <div class="sub-content">
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Your initial questions or requests will be loaded on login, you don't have to ask them
+                        again.</span>
+                </div>
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Seamlessly Integrate with your WhatsApp application.</span>
+                </div>
+                <div class="list">
+                    <img src="assets/icons/bullet.png" alt="">
+                    <span>Ut magna justo quis neque. Senectus lorem maecenas eleifend ullamcorper sed enim lectus. Lectus
+                        senectus.</span>
+                </div>
+            </div>
+        </div>
+        <div class="pricing">
+            <div class="options tabs">
+                <span (click)="switchDurationOption('monthly')"
+                    [ngClass]="{active: paymentDurationOption.durationOption == 'monthly' && paymentDurationOption.status == 'active' }">Monthly</span>
+                <span (click)="switchDurationOption('annual')"
+                    [ngClass]="{active: paymentDurationOption.durationOption == 'annual' && paymentDurationOption.status == 'active' }">Yearly</span>
+            </div>
+    
+            <hr style="margin: 10px -39px 45px -39px; border: 0.5px solid #D6D6D6;" />
+    
+            <div class="option-content pricing-body" *ngIf="paymentDurationOption.durationOption == 'monthly'">
+                <span class="price">{{paymentDurationOption.price}}</span>
+                <span class="description">Per month, paid anually</span>
+                <span (click)="switchDurationOption('annual')" class="last">Switch to yearly payment</span>
+    
+                <div class="footer">
+                    <button class="btn" *ngIf="isLoading == false" (click)="goToSub()">Proceed to payment</button>
+                    <app-dotted-loader *ngIf="isLoading == true"></app-dotted-loader>
+                </div>
+            </div>
+    
+            <div class="option-content pricing-body" *ngIf="paymentDurationOption.durationOption == 'annual'">
+                <span class="price">{{paymentDurationOption.price}}</span>
+                <span class="description annual-desc">Paid anually</span>
+    
+                <div class="footer">
+                    <button class="btn" *ngIf="isLoading == false" (click)="goToSub()">Proceed to payment</button>
+                    <app-dotted-loader *ngIf="isLoading == true"></app-dotted-loader>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-footer">
+        <div class="quick-links">
+            <div class="link-group">
+                <span class="head">APP</span>
+                <span class="link" (click)="openForm('login')">log in</span>
+                <span class="link" (click)="openForm('signup')">Sign upl</span>
+            </div>
+            <div class="link-group">
+                <span class="head">Academix Assist</span>
+                <span class="link">about us</span>
+                <span class="link">contact us</span>
+            </div>
+            <div class="link-group">
+                <span class="head">follow us</span>
+                <span class="link">youtube</span>
+                <span class="link">instagram</span>
+                <span class="link">linkedin</span>
+                <span class="link">twitter</span>
+            </div>
+            <div class="link-group">
+                <span class="head">Legal</span>
+                <span class="link">privacy police</span>
+                <span class="link">term and condition</span>
+            </div>
+        </div>
+    
+        <div class="footer-home">
+            <div class="logo">
+                <span class="main-logo">Academix</span>
+                <span class="sub-logo">Assist</span>
+            </div>
+            <div class="form-control">
+                <label for="">Sign up for our juicy weekly newsletter</label>
+                <div class="form-holder">
+                    <input placeholder="Enter your email" type="text" name="" id="">
+                    <button>Sign me up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal *ngIf="openAuthModal">
+    <div class="login" *ngIf="openLogInModal">
+        <div class="header">
+            <img src="assets/icons/close2.png" class="close" (click)="closeModalAction()" alt="">
+
+            <h2>Log In</h2>
+            <p>Get all academics information with ease</p>
+        </div>
+
+        <form [formGroup]="loginForm" class="modal-form" (ngSubmit)="login()">
+            <div class="form-controls">
+                <label for="">Email</label>
+                <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+            </div>
+
+            <div class="form-controls">
+                <label for="">Password</label>
+                <input formControlName="password" type="password" placeholder="*************">
+            </div>
+
+            <button *ngIf="!isLoading" type="submit" class="btn">Log In</button>
+            <app-dotted-loader *ngIf="isLoading"></app-dotted-loader>
+        </form>
+
+        <div class="others">
+            <p>Don’t have an account? <span (click)="openForm('signup')">Sign Up</span></p>
+        </div>
+    </div>
+
+    <div class="signup" *ngIf="openSignUpModal">
+        <div class="header">
+            <img src="assets/icons/close2.png" class="close" (click)="closeModalAction()" alt="">
+
+            <h2>Sign Up</h2>
+            <p>Join Academix Assist to get all academics information with ease</p>
+        </div>
+
+        <form [formGroup]="signinForm" (ngSubmit)="signup()" class="modal-form">
+            <div class="form-controls">
+                <label for="">Email</label>
+                <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+            </div>
+
+            <div class="form-controls">
+                <label for="">Pnoe Number (WhatsApp)</label>
+                <input formControlName="phone" type="tel" placeholder="08065432135">
+            </div>
+
+            <div class="form-controls">
+                <label for="">Password</label>
+                <input formControlName="password" type="password" placeholder="*************">
+            </div>
+
+            <button *ngIf="!isLoading" (click)="signup()" type="submit" class="btn">Sign Up</button>
+            <app-dotted-loader *ngIf="isLoading"></app-dotted-loader>
+        </form>
+
+        <div class="others">
+            <p>Already have an account? <span (click)="openForm('login')">Log In</span></p>
+        </div>
+    </div>
+</app-modal>

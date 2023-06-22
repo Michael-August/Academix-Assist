@@ -1,12 +1,15 @@
 <div class="nav-bar">
-    <div class="logo">
+    <div class="logo" routerLink="/">
         <span class="main-logo">Academix</span>
         <span class="sub-logo">Assist</span>
     </div>
 
     <div class="links">
         <ul class="authenticated link-items">
-            <li routerLink="/sub-detail" routerLinkActive="active" class="link-item" style="margin-right: 30px;">
+            <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item">
+                Home
+            </li>
+            <li routerLink="/sub-detail" routerLinkActive="active" class="link-item" style="margin-right: 30px; margin-left: 30px;">
                 Go premium
             </li>
             <li class="link-item">
@@ -16,8 +19,11 @@
         </ul>
 
         <!-- <ul class="unauthenticated link-items">
+            <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" class="link-item">
+                Home
+            </li>
             <li class="link-item sign-up" (click)="openForm('signup')">
-                Sign up
+                Get started
             </li>
             <li class="link-item" (click)="openForm('login')">
                 Log in
