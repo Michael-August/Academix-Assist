@@ -5,7 +5,7 @@
     </div>
 
     <div class="links">
-        <ul class="authenticated link-items">
+        <ul *ngIf="isLoggedIn || user" class="authenticated link-items">
             <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item">
                 Home
             </li>
@@ -14,11 +14,11 @@
             </li>
             <li class="link-item">
                 <img src="assets/images/noimg_avatar.png" alt="">
-                <span class="loggedin-user">Michael August</span>
+                <span class="loggedin-user">{{user.fullName}}</span>
             </li>
         </ul>
 
-        <!-- <ul class="unauthenticated link-items">
+        <ul *ngIf="user == null" class="unauthenticated link-items">
             <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" class="link-item">
                 Home
             </li>
@@ -28,7 +28,7 @@
             <li class="link-item" (click)="openForm('login')">
                 Log in
             </li>
-        </ul> -->
+        </ul>
     </div>
 </div>
 
@@ -71,12 +71,16 @@
     
         <form [formGroup]="signinForm" (ngSubmit)="signup()" class="modal-form">
             <div class="form-controls">
+                <label for="">Full Name</label>
+                <input formControlName="fullName" type="text" placeholder="Michael August">
+            </div>
+            <div class="form-controls">
                 <label for="">Email</label>
                 <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
             </div>
 
             <div class="form-controls">
-                <label for="">Pnoe Number (WhatsApp)</label>
+                <label for="">Phone Number (WhatsApp)</label>
                 <input formControlName="phone" type="tel" placeholder="08065432135">
             </div>
     

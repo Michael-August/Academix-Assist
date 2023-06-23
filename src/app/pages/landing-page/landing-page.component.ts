@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { NotificationService, ToasterType } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authSrv: AuthService, private notifSrv: NotificationService) { }
 
   paymentDurationOption = {
     status: 'active',
@@ -58,12 +60,35 @@ export class LandingPageComponent implements OnInit {
     this.openAuthModal = false
   }
 
-  signup() {
-
+  login() {
+    this.isLoading = true
+    this.authSrv.login({...this.loginForm.value}).subscribe((res: any) => {
+      if(res.success == true) {
+        this.authSrv.isLoggedIn$.next(true)
+        localStorage.setItem('Token', res.data.access_token)
+        let user = JSON.stringify(res.data.loggedinUser)
+        localStorage.setItem('User', user)
+        
+        this.router.navigateByUrl('/chat')
+        this.notifSrv.notifyByToast('User logged in successfully', ToasterType.Success)
+      }
+    }).add(() => this.isLoading = false)
   }
 
-  login() {
+  signup() {
+    this.isLoading = true
+    this.authSrv.signup({...this.signinForm.value}).subscribe(res => {
+      this.openAuthModal = true
+      this.openLogInModal = true
+    }, err => {
+      if(err.status == 400) {
+        this.notifSrv.notifyByToast(`${err.error.message}`, ToasterType.Error)
+      }
+    }).add(() => this.isLoading = false)
+  }
 
+  logOut(){
+    this.authSrv.logOut()
   }
 
   openForm(form: string) {

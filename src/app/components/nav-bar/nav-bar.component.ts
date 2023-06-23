@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { NotificationService, ToasterType } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,9 +11,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authSrv: AuthService, private router: Router, private notifSrv: NotificationService) { }
 
   isLoading: boolean = false
+
+  isLoggedIn: any
+  user: any
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -19,6 +25,7 @@ export class NavBarComponent implements OnInit {
 
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
+    fullName: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   })
@@ -28,18 +35,43 @@ export class NavBarComponent implements OnInit {
   openSignUpModal: boolean = false
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('User') || '')
+    this.authSrv.isLoggedIn$.asObservable().subscribe(res => this.isLoggedIn = res)
   }
 
   closeModalAction () {
     this.openAuthModal = false
   }
 
-  signup() {
-
+  login() {
+    this.isLoading = true
+    this.authSrv.login({...this.loginForm.value}).subscribe((res: any) => {
+      if(res.success == true) {
+        this.authSrv.isLoggedIn$.next(true)
+        localStorage.setItem('Token', res.data.access_token)
+        let user = JSON.stringify(res.data.loggedinUser)
+        localStorage.setItem('User', user)
+        
+        this.router.navigateByUrl('/chat')
+        this.notifSrv.notifyByToast('User logged in successfully', ToasterType.Success)
+      }
+    }).add(() => this.isLoading = false)
   }
 
-  login() {
+  signup() {
+    this.isLoading = true
+    this.authSrv.signup({...this.signinForm.value}).subscribe(res => {
+      this.openAuthModal = true
+      this.openLogInModal = true
+    }, err => {
+      if(err.status == 400) {
+        this.notifSrv.notifyByToast(`${err.error.message}`, ToasterType.Error)
+      }
+    }).add(() => this.isLoading = false)
+  }
 
+  logOut(){
+    this.authSrv.logOut()
   }
 
   openForm(form: string) {

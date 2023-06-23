@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { DottedLoaderComponent } from './shared/components/dotted-loader/dotted-loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PremiumAdPageComponent } from './pages/premium-ad-page/premium-ad-page.component';
+import { ToastrModule } from 'ngx-toastr';
+import { RequestInterceptor } from './core/interceptors/request/request.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,9 +32,21 @@ import { PremiumAdPageComponent } from './pages/premium-ad-page/premium-ad-page.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      closeButton: true,
+      positionClass: 'toast-top-center'
+    }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
