@@ -1,40 +1,23 @@
 <div class="convo-side">
     <div class="new-chat">
-        <button><img src="assets/icons/plus.png" alt=""> New chat</button>
+        <button (click)="updateIsNewValue()">
+            <img src="assets/icons/plus.png" alt=""> 
+            New chat
+        </button>
     </div>
 
-    <div class="conversations">
-        <div class="conversation active">
+    <div class="conversations" *ngFor="let convo of conversations">
+        <div class="conversation" (click)="emitForMessages(convo._id)">
             <img src="assets/icons/message.png" alt="">
-            <span class="message"> Show me the course outline for CSC510</span>
+            <span class="message"> {{convo.message}}</span>
         </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message">Course Outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message"> Show me the course outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message">Course Outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message"> Show me the course outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message">Course Outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message"> Show me the course outline for CSC510</span>
-        </div>
-        <div class="conversation">
-            <img src="assets/icons/message.png" alt="">
-            <span class="message">Course Outline for CSC510</span>
-        </div>
+    </div>
+
+    <!-- <div *ngIf="conversations.length > 0 && user.plan == 'free'" class="conversation empty">
+        <span>Subscribe to previous conversations</span>
+    </div> -->
+
+    <div *ngIf="conversations.length == 0" class="conversation empty">
+        <span>Ask for your first help</span>
     </div>
 </div>

@@ -68,6 +68,26 @@
     font-weight: 600;
 }
 
+.logout {
+    display: none;
+    position: absolute;
+    left: 55%;
+    top: 90%;
+    z-index: 100;
+    background-color: #FFFFFF;
+    padding: 20px 30px;
+    box-shadow: 0px 8px 16px rgba(0, 30, 84, 0.16);
+    cursor: pointer;
+
+    span {
+        color: red;
+    }
+}
+
+.show {
+    display: block;
+}
+
 
 // Modal
 .header {
@@ -208,5 +228,16 @@
         &:hover {
             opacity: 0.8;
         }
+    }
+}
+
+.error-msgs {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    span {
+        color: red;
     }
 }

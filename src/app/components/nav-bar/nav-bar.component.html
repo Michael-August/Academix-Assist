@@ -4,19 +4,26 @@
         <span class="sub-logo">Assist</span>
     </div>
 
-    <div class="links">
-        <ul *ngIf="isLoggedIn || user" class="authenticated link-items">
+    <div class="links" style="position: relative;">
+        <ul *ngIf="isLoggedIn == true || user" class="authenticated link-items">
             <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item">
                 Home
+            </li>
+            <li routerLink="/chat" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item" style=" margin-left: 30px;">
+                Chat
             </li>
             <li routerLink="/sub-detail" routerLinkActive="active" class="link-item" style="margin-right: 30px; margin-left: 30px;">
                 Go premium
             </li>
-            <li class="link-item">
+            <li (click)="showSignOut()" class="link-item">
                 <img src="assets/images/noimg_avatar.png" alt="">
                 <span class="loggedin-user">{{user.fullName}}</span>
             </li>
         </ul>
+
+        <div (click)="logOut()" class="logout" [ngClass]="{show: signOutOpen == true}">
+            <span>signout</span>
+        </div>
 
         <ul *ngIf="user == null" class="unauthenticated link-items">
             <li routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" class="link-item">
@@ -44,12 +51,22 @@
         <form [formGroup]="loginForm" class="modal-form" (ngSubmit)="login()">
             <div class="form-controls">
                 <label for="">Email</label>
-                <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+                <input (keyup)="clearErrorMsg()" formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+                <div class="error-msgs">
+                    <span *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">Email is Required</span>
+                    <span *ngIf="loginForm.controls['email'].hasError('email')">Invalid Email</span>
+                    <span *ngIf="isError">{{msg}}</span>
+                </div>
             </div>
     
             <div class="form-controls">
                 <label for="">Password</label>
                 <input formControlName="password" type="password" placeholder="*************">
+                <div class="error-msgs">
+                    <span *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">Password is
+                        Required</span>
+                    <span *ngIf="loginForm.controls['password'].hasError('minlength')">Password must be up to 8 characters</span>
+                </div>
             </div>
     
             <button *ngIf="!isLoading" type="submit" class="btn">Log In</button>
@@ -77,16 +94,31 @@
             <div class="form-controls">
                 <label for="">Email</label>
                 <input formControlName="email" type="email" placeholder="oliva@untitlededui.com">
+                <div class="error-msgs">
+                    <span *ngIf="signinForm.controls['email'].touched && signinForm.controls['email'].invalid">Email is Required</span>
+                    <span *ngIf="signinForm.controls['email'].hasError('email')">Invalid Email</span>
+                    <span *ngIf="isError">{{msg}}</span>
+                </div>
             </div>
 
             <div class="form-controls">
                 <label for="">Phone Number (WhatsApp)</label>
                 <input formControlName="phone" type="tel" placeholder="08065432135">
+                <div class="error-msgs">
+                    <span *ngIf="signinForm.controls['phone'].touched && signinForm.controls['phone'].invalid">Phone number is
+                        Required</span>
+                    <!-- <span *ngIf="signinForm.controls['phone'].hasError('minlength')">Phone must be up to 8 characters</span> -->
+                </div>
             </div>
     
             <div class="form-controls">
                 <label for="">Password</label>
                 <input formControlName="password" type="password" placeholder="*************">
+                <div class="error-msgs">
+                    <span *ngIf="signinForm.controls['password'].touched && signinForm.controls['password'].invalid">Password is
+                        Required</span>
+                    <span *ngIf="signinForm.controls['password'].hasError('minlength')">Password must be up to 8 characters</span>
+                </div>
             </div>
     
             <button *ngIf="!isLoading" (click)="signup()" type="submit" class="btn">Sign Up</button>

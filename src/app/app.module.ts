@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PremiumAdPageComponent } from './pages/premium-ad-page/premium-ad-page.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RequestInterceptor } from './core/interceptors/request/request.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,11 @@ import { RequestInterceptor } from './core/interceptors/request/request.intercep
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     },
   ],

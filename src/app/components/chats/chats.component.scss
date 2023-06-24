@@ -19,3 +19,27 @@
         color: black;
     }
 }
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20%;
+    margin: 0 32px;
+
+    .main-logo {
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: 2px;
+        color: #6E758C;
+    }
+
+    .sub-logo {
+        opacity: 0.9;
+        font-size: 30px;
+        font-weight: 600;
+        color: #EB5B28;
+        margin-left: 130px;
+    }
+}

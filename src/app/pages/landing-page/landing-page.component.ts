@@ -38,6 +38,9 @@ export class LandingPageComponent implements OnInit {
 
   user: any
 
+  isError: boolean = false
+  msg = ''
+
   ngOnInit(): void {
   }
 
@@ -68,6 +71,7 @@ export class LandingPageComponent implements OnInit {
         localStorage.setItem('Token', res.data.access_token)
         let user = JSON.stringify(res.data.loggedinUser)
         localStorage.setItem('User', user)
+        this.openAuthModal = false
         
         this.router.navigateByUrl('/chat')
         this.notifSrv.notifyByToast('User logged in successfully', ToasterType.Success)
@@ -79,6 +83,7 @@ export class LandingPageComponent implements OnInit {
     this.isLoading = true
     this.authSrv.signup({...this.signinForm.value}).subscribe(res => {
       this.openAuthModal = true
+      this.openSignUpModal = false
       this.openLogInModal = true
     }, err => {
       if(err.status == 400) {
@@ -87,8 +92,12 @@ export class LandingPageComponent implements OnInit {
     }).add(() => this.isLoading = false)
   }
 
-  logOut(){
-    this.authSrv.logOut()
+  clearErrorMsg() {
+    if(this.loginForm.controls['email'].dirty) {
+      this.isError = false
+      this.msg = ''
+      return
+    }
   }
 
   openForm(form: string) {

@@ -8,23 +8,24 @@ import {
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { NotificationService, ToasterType } from 'src/app/shared/services/notification/notification.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private notifSrv: NotificationService, private authSrv: AuthService) {}
+  constructor(private notifSrv: NotificationService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(err => {
         if (err.status === 401 && err.error['message'] === 'jwt expired') {
-          this.authSrv.logOut();
+          this.router.navigateByUrl('/');
           this.notifSrv.notifyByToast('Token expired, log in again', ToasterType.Error)
         }
 
         if (err.status === 401) {
-          this.authSrv.logOut();
-          this.notifSrv.notifyByToast('No user found, signup first', ToasterType.Error)
+          this.router.navigateByUrl('/');
+          this.notifSrv.notifyByToast('Invalid credentials, check and try again', ToasterType.Error)
         }
 
         if(err.status == 500 && err.error.message === "jwt malformed") {

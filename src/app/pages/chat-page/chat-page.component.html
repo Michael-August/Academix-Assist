@@ -1,15 +1,18 @@
 <div style="position: relative;">
     <div class="chat">
         <div class="conversations">
-            <app-conversations></app-conversations>
+            <app-conversations [conversations]="conversations" (emitConvoId)="getMessages($event)" (emitIsNewFlag)="grabIsNewState($event)"></app-conversations>
         </div>
         <div class="chat-details">
-            <app-chats></app-chats>
+            <app-chats [isNew]="isNew" [isLoading]="isLoading" [messages]="messages"></app-chats>
         </div>
     </div>
 
     <div class="text-box">
-        <input placeholder="Send a message" type="text" name="" id="">
-        <img src="assets/icons/send.png" alt="">
+        <form action="" [formGroup]="messageForm">
+            <input formControlName="message" placeholder="Send a message" type="text" name="" id="">
+            <img *ngIf="messageForm.invalid" src="assets/icons/send.png" alt="">
+            <img (click)="createMessage()" *ngIf="messageForm.valid" class="valid" src="assets/icons/send.png" alt="">
+        </form>
     </div>
 </div>

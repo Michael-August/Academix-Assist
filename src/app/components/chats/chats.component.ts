@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IMessage } from 'src/app/core/models/message.model';
 
 @Component({
   selector: 'app-chats',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ChatsComponent implements OnInit {
 
   constructor() { }
+
+  @Input() messages: IMessage[] = []
+  @Input() isLoading: boolean = false
+  @Input() isNew: boolean = false
 
   ngOnInit(): void {
   }
